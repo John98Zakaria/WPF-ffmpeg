@@ -25,8 +25,7 @@ namespace VisualFFmpeg
     /// </summary>
     public partial class MainWindow : Window
     {
-        static string SavePath = "";
-        static double currentPercentage = 0;
+        static string SavePath = "";       
         public MainWindow()
         {
             InitializeComponent();
@@ -46,7 +45,7 @@ namespace VisualFFmpeg
         {
             OpenFileDialog loadFile = new OpenFileDialog();
             loadFile.Title = "Select FFmpeg Path";
-            loadFile.InitialDirectory = "D:\\";
+            loadFile.InitialDirectory = @"D:\ffmpeg\bin";
             loadFile.ShowDialog();
             loadFile_lbl.Content = loadFile.FileName;
         }
@@ -55,7 +54,8 @@ namespace VisualFFmpeg
         {
             SaveFileDialog saveFile = new SaveFileDialog();
             saveFile.Title = "Save As";
-            saveFile.ShowDialog();
+            saveFile.Filter = "mp3 audio (*.mp3)|*.mp3 |mp4 video (*.mp4)|*.mp4|All files (*.*)|*.*";
+            saveFile.ShowDialog();      
             SavePath = saveFile.FileName;
             MessageBox.Show(SavePath);
 
@@ -63,16 +63,21 @@ namespace VisualFFmpeg
 
         private void convert_btn_Click(object sender, RoutedEventArgs e)
         {
+            Dictionary<string, string> keyValuePairs = new Dictionary<string, string> {
+                {"ffmpegpath", ffmpegPathLabel.Content.ToString() },
+                {"inputFilePath",loadFile_lbl.Content.ToString() },
+                {"outputFilePath",SavePath }
+            };
             convert_btn.IsEnabled = false;
             Thread ffmpeg = new Thread(ffmpegAction);
-
-            ffmpeg.Start(ffmpegPathLabel.Content);
+            ffmpeg.Start(keyValuePairs);
         }
 
-        private void ffmpegAction(object path)
+        private void ffmpegAction(object args)
         {
-
-            ffmpegHandeler ffmpeg = new ffmpegHandeler((string)path);
+            Dictionary<string,string> parameters = (Dictionary<string, string>)args;
+           
+            ffmpegHandeler ffmpeg = new ffmpegHandeler(parameters["ffmpegpath"],parameters["inputFilePath"], parameters["outputFilePath"]);
             ffmpeg.PercantageChange += update_load;
             ffmpeg.StartConverion();
             convert_btn.Dispatcher.BeginInvoke((Action)(() => convert_btn.IsEnabled = true));
@@ -84,7 +89,7 @@ namespace VisualFFmpeg
         private void update_load(object sender, EventArgs e)
         {
 
-            percent_lbl.Dispatcher.BeginInvoke((Action)(() => percent_lbl.Content = e.ToString()));
+            percent_num_lbl.Dispatcher.BeginInvoke((Action)(() => percent_num_lbl.Content = Math.Round(Convert.ToDouble(e.ToString()), 2)));
             percent_bar.Dispatcher.BeginInvoke((Action)(() => percent_bar.Value = Convert.ToDouble(e.ToString())));
 
         }

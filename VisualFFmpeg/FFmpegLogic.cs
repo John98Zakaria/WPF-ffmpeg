@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Windows.Controls;
 
 namespace VisualFFmpeg
 {
@@ -96,12 +95,14 @@ namespace VisualFFmpeg
 
         
         public void StartConverion(){
+
+            string argument = "-i " + InputFile + " " + OutputFIle; 
             Process process = new Process
             {
                 StartInfo = new ProcessStartInfo
                 {
                     FileName = FFmpegPath,
-                    Arguments = @"-i D:\pointer.mp4 D:\output.mp3",
+                    Arguments = argument,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
                     CreateNoWindow = true,

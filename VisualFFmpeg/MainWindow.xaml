@@ -16,9 +16,10 @@
         <Label x:Name="ffmpegPathLabel" Content="D:\ffmpeg\bin\ffmpeg.exe" HorizontalAlignment="Left" Margin="12,26,0,0" VerticalAlignment="Top" Grid.Column="2"/>
         <Label x:Name="loadFile_lbl" Content="Loaded file Path" HorizontalAlignment="Left" Margin="39,67,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.115,0.185" Grid.Column="2"/>
         <Button x:Name="loadFfmpeg_btn" Content="SelectFFmpegPath" HorizontalAlignment="Left" Margin="10,23,0,0" VerticalAlignment="Top" Height="29" Width="106" Click="loadffmpeg_btn_Click" Grid.ColumnSpan="2"/>
-        <Button x:Name="loadFile_btn" Content="loadFile_lbl" HorizontalAlignment="Left" Margin="10,67,0,0" VerticalAlignment="Top" Height="29" Width="106" Click="loadFile_btn_Click" Grid.ColumnSpan="2"/>
+        <Button x:Name="loadFile_btn" Content="Load File" HorizontalAlignment="Left" Margin="10,67,0,0" VerticalAlignment="Top" Height="29" Width="106" Click="loadFile_btn_Click" Grid.ColumnSpan="2"/>
         <Button x:Name="saveFile_btn" Content="Save As" HorizontalAlignment="Left" Margin="10,116,0,0" VerticalAlignment="Top" Height="29" Width="106" Click="saveFile_btn_Click" Grid.ColumnSpan="2"/>
-        <ProgressBar x:Name="percent_bar" HorizontalAlignment="Left" Height="23" Margin="4,363,0,0" VerticalAlignment="Top" Width="513" Grid.ColumnSpan="2" Grid.Column="1"/>
-        <Label x:Name="percent_lbl" Content="%" HorizontalAlignment="Left" Margin="180,0,0,0" VerticalAlignment="Center" Grid.Column="2"/>
+        <ProgressBar x:Name="percent_bar" HorizontalAlignment="Left" Height="23" Margin="10,363,0,0" VerticalAlignment="Top" Width="513" Grid.ColumnSpan="3"/>
+        <Label x:Name="percent_num_lbl" Content="0" HorizontalAlignment="Left" Margin="391,361,0,0" VerticalAlignment="Top" Grid.Column="2" RenderTransformOrigin="0.53,-0.557"/>
+        <Label x:Name="percent_lbl" Content="%" HorizontalAlignment="Left" Margin="428,362,0,0" VerticalAlignment="Top" Grid.Column="2" RenderTransformOrigin="0.53,-0.557"/>
     </Grid>
 </Window>
